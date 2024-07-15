@@ -38,3 +38,6 @@ next-env.d.ts
 /public/products
 .env
 /prisma/dev.db
+
+#dev
+dev.db-journal
