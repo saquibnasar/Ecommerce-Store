@@ -6,19 +6,19 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { formatCurrency } from "@/lib/formatters";
 import { useState } from "react";
-import { addProduct, updateProduct } from "../../_actions/products";
+import addProduct, { updateProduct } from "../../_actions/products";
 import { useFormState, useFormStatus } from "react-dom";
 import { Product } from "@prisma/client";
 import Image from "next/image";
 
 export function ProductForm({ product }: { product?: Product | null }) {
-  //   const [error, action] = useFormState(
-  //     product == null ? addProduct : updateProduct.bind(null, product.id),
-  //     {}
-  //   );
-  //   const [priceInCents, setPriceInCents] = useState<number | undefined>(
-  //     product?.priceInCents
-  //   );
+  const [error, action] = useFormState(
+    product == null ? addProduct : updateProduct.bind(null, product.id),
+    {}
+  );
+  const [priceInCents, setPriceInCents] = useState<number | undefined>(
+    product?.priceInCents
+  );
 
   return (
     <form action={action} className="space-y-8">
@@ -31,7 +31,7 @@ export function ProductForm({ product }: { product?: Product | null }) {
           required
           defaultValue={product?.name || ""}
         />
-        {/* {error.name && <div className="text-destructive">{error.name}</div>} */}
+        {error.name && <div className="text-destructive">{error.name}</div>}
       </div>
       <div className="space-y-2">
         <Label htmlFor="priceInCents">Price In Cents</Label>
